@@ -39,6 +39,24 @@ app.get("/students",(req,res)=>{
     })
 })
 
+app.put("/update-student",(req,res)=>{
+    Student.updateOne(
+        {name: req.body.oldName},
+        {name:req.body.newName}
+    ).then(()=>{
+        res.send("student updated")
+    })
+})
+
+app.delete("/delete-student",(req,res)=>{
+    Student.deleteOne({
+        name: req.body.name
+    })
+    .then(()=>{
+        res.send("student deleted")
+    })
+})
+
 app.listen(8000,()=>{
     console.log("server running on port 8000")
 })
